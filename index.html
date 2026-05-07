@@ -494,8 +494,13 @@
     <h2 class="section-title">Gallery</h2>
     <div class="gallery-grid">
       <!-- Reemplaza los divs .gallery-placeholder con <img src="tu-foto.jpg"> -->
-      <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 16/9;">
-        <video src="VLNDEMO3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" autoplay loop playsinline></video>
+      <div class="gallery-item" style="grid-column: span 2; aspect-ratio: 16/9; position:relative;">
+        <video id="galleryVideo" src="VLNDEMO3.mp4" style="width:100%;height:100%;object-fit:cover;display:block;" loop playsinline></video>
+        <div id="videoOverlay" onclick="playGalleryVideo()" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:pointer;background:rgba(0,0,0,0.25);transition:background 0.2s;">
+          <div style="width:64px;height:64px;border-radius:50%;border:2px solid #fff;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.4);transition:transform 0.2s;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -516,6 +521,13 @@
 </footer>
 
 <script>
+  function playGalleryVideo() {
+    const video = document.getElementById('galleryVideo');
+    const overlay = document.getElementById('videoOverlay');
+    video.play();
+    overlay.style.display = 'none';
+  }
+
   function scrollToSection(id) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
   }
